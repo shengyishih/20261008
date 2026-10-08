@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10101a" />
+  <meta name="description" content="一款霓虹街機風格的俄羅斯方塊遊戲。" />
+  <title>方塊夜行 — Tetris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="wordmark" href="#" aria-label="方塊夜行首頁"><span class="logo-mark"><i></i><i></i><i></i><i></i></span><span>BLOCK<span class="wordmark-light">AFTER</span>DARK</span></a>
+      <div class="top-meta"><span class="live-dot"></span> ARCADE MODE <span class="meta-divider">/</span> NO. 001</div>
+      <button class="sound-button" id="soundButton" aria-label="切換音效" title="切換音效"><span id="soundIcon">♫</span></button>
+    </header>
+
+    <section class="intro">
+      <div class="eyebrow"><span>01</span><span class="eyebrow-line"></span><span>THE CLASSIC, REWIRED</span></div>
+      <h1>讓方塊<span class="title-outline">落下。</span></h1>
+      <p class="intro-copy">留出空間，消除整行。節奏越快，分數越高。<br class="desktop-break" />準備好，就開始你的下一局。</p>
+    </section>
+
+    <section class="game-layout" aria-label="俄羅斯方塊遊戲">
+      <aside class="side-panel left-panel">
+        <div class="panel-label">CURRENT RUN <span class="tiny-cross">✳</span></div>
+        <div class="stat-block"><span class="stat-name">SCORE</span><strong id="score">000000</strong></div>
+        <div class="stat-block"><span class="stat-name">BEST</span><strong id="best">000000</strong></div>
+        <div class="stat-row">
+          <div class="stat-block"><span class="stat-name">LEVEL</span><strong id="level">01</strong></div>
+          <div class="stat-block"><span class="stat-name">LINES</span><strong id="lines">00</strong></div>
+        </div>
+        <div class="side-rule"></div>
+        <div class="panel-label">NEXT UP <span class="muted-note">NO. <span id="pieceNumber">01</span></span></div>
+        <div class="next-frame"><canvas id="nextCanvas" width="120" height="100" aria-label="下一個方塊"></canvas></div>
+        <div class="level-track"><div class="level-track-fill" id="levelFill"></div></div>
+        <div class="track-caption"><span>LEVEL PROGRESS</span><span id="progressText">0 / 10</span></div>
+      </aside>
+
+      <div class="board-wrap">
+        <div class="board-topline"><span><span class="live-dot"></span> LIVE SESSION</span><span id="statusText">READY WHEN YOU ARE</span></div>
+        <div class="board-frame" id="boardFrame">
+          <canvas id="gameCanvas" width="300" height="600" aria-label="俄羅斯方塊遊戲棋盤"></canvas>
+          <div class="overlay" id="overlay">
+            <div class="overlay-kicker" id="overlayKicker">INSERT COIN</div>
+            <div class="overlay-title" id="overlayTitle">準備好了嗎？</div>
+            <p class="overlay-copy" id="overlayCopy">把方塊排好，別讓它們碰到頂端。</p>
+            <button class="start-button" id="startButton"><span id="startButtonText">開始遊戲</span><span class="button-arrow">↗</span></button>
+            <div class="overlay-hint">PRESS <kbd>ENTER</kbd> TO START</div>
+          </div>
+          <div class="pause-badge" id="pauseBadge">PAUSED</div>
+        </div>
+        <div class="board-footer"><span>10 × 20 GRID</span><span>BUILT FOR ONE MORE ROUND <b>↗</b></span></div>
+      </div>
+
+      <aside class="side-panel right-panel">
+        <div class="panel-label">HOW TO PLAY <span class="tiny-cross">✳</span></div>
+        <div class="key-row"><span class="key-cluster"><kbd>←</kbd><kbd>→</kbd></span><span>移動方塊</span></div>
+        <div class="key-row"><span class="key-cluster"><kbd>↑</kbd></span><span>旋轉方塊</span></div>
+        <div class="key-row"><span class="key-cluster"><kbd>↓</kbd></span><span>加速下降</span></div>
+        <div class="key-row"><span class="key-cluster"><kbd>SPACE</kbd></span><span>直接落下</span></div>
+        <div class="key-row"><span class="key-cluster"><kbd>P</kbd></span><span>暫停遊戲</span></div>
+        <div class="side-rule"></div>
+        <div class="panel-label">QUICK TIP <span class="muted-note">✦</span></div>
+        <p class="tip-copy">一次消除多行，<br />得分會大幅提升。</p>
+        <div class="combo-chip"><span>✳</span> KEEP THE COMBO</div>
+        <button class="restart-link" id="restartButton"><span class="restart-icon">↻</span> 重新開始 <span>↗</span></button>
+      </aside>
+    </section>
+
+    <section class="mobile-controls" aria-label="觸控操作">
+      <button class="control-button secondary" data-action="left" aria-label="向左">←</button>
+      <button class="control-button secondary" data-action="down" aria-label="加速下降">↓</button>
+      <button class="control-button rotate-control" data-action="rotate" aria-label="旋轉">↻<small>旋轉</small></button>
+      <button class="control-button secondary" data-action="right" aria-label="向右">→</button>
+      <button class="control-button drop-control" data-action="drop" aria-label="直接落下">⬇<small>DROP</small></button>
+    </section>
+
+    <footer class="page-footer"><span>AN EXERCISE IN SPATIAL THINKING.</span><span>TAKE YOUR TIME. <b>THEN DON’T.</b></span><span>© 2025 BLOCK AFTER DARK</span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
